@@ -286,5 +286,4 @@ Total size: 183974, file chunks: 3, metadata chunks: 3
 
 ## Conclusion
 
-**Duplicacy** is a powerful backup tool and this tutorial is only a brief introduction of what it has to offer.    
-Check out the Duplicacy [forum](https://forum.duplicacy.com/) for complete documentation and helpful community support.
+**Duplicacy** is a powerful backup tool and this tutorial is only a brief introduction of what it has to offer. Check out the Duplicacy [forum](https://forum.duplicacy.com/) for complete documentation and helpful community support.
