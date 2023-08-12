@@ -1,4 +1,4 @@
-## How to configure cron with debug logging
+# How to configure cron with debug logging
 
 ### Environment
 Red Hat Enterprise Linux

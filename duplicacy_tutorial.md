@@ -1,3 +1,5 @@
+# How to use Duplicacy to backup to Storj cloud storage
+
 ## Introduction
 
 [Duplicacy](https://duplicacy.com) is a cross-platform cloud backup tool with client-side encryption and fast performance.
