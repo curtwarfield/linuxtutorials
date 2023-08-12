@@ -1,3 +1,3 @@
 # Linux Tutorials
 
-These tutorials are hosted on [tutorials.garnerpcsquad.com](https://tutorials.garnerpcsquad.com).
+These tutorials are hosted on [tutorials.garnerpcsquad.com](https://tutorials.garnerpcsquad.com) and uses Gitbook to generate the content.
