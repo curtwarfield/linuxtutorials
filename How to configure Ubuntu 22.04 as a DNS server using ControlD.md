@@ -13,14 +13,20 @@ This means it not only blocks things (ads, porn, etc), but can also unblock webs
 
 ## Installation
 
-1) Install the `ctrld` utility.
+1. Install the `ctrld` utility.
 ~~~
 sh -c 'sh -c "$(curl -sL https://api.controld.com/dl)" -s RESOLVER_ID_HERE'
 ~~~
 Substitute `RESOLVER_ID_HERE` with your actual **Resolver ID**.
 
-2) Start the `ctrld` service.
+2. Start the `ctrld` service.
 ~~~
 # ctrld start
 ~~~
 3. Edit the `/etc/controld/ctrld.toml` file.
+~~~
+[listener]
+  [listener.0]
+    ip = '192.168.4.136'
+    port = 53
+~~~    
