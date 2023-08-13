@@ -44,3 +44,10 @@ Substitute `RESOLVER_ID_HERE` with your actual **Resolver ID**.
 ```
 
 3. Edit the `/etc/controld/ctrld.toml` file.
+
+```
+[listener]
+  [listener.0]
+    ip = '192.168.4.136'
+    port = 53
+```
