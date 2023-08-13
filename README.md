@@ -1,3 +1,17 @@
-# Linux Tutorials
+---
+layout:
+  title:
+    visible: true
+  description:
+    visible: false
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+---
 
-These tutorials are hosted on [tutorials.garnerpcsquad.com](https://tutorials.garnerpcsquad.com) and uses [Gitbook](https://www.gitbook.com/) to generate the content.
+# Home
+
+Linux Administration tutorials made simple!
