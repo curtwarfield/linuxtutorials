@@ -37,19 +37,31 @@ $ sudo sh -c 'sh -c "$(curl -sL https://api.controld.com/dl)" -s RESOLVER_ID_HER
 
 Substitute `RESOLVER_ID_HERE` for your actual **Resolver ID**.
 
-2. Start the `ctrld` service.
+2. Start the `ControlD` DNS proxy service.
 
 ```
-$ sudo ctrld start
+$ sudo ctrld run
 ```
 
-3. Edit the `/etc/controld/ctrld.toml` file.
+3. Edit the `/etc/controld/ctrld.toml` file to change the `ip = '127.0.0.1'` line to the actual **IP address** of the server.
 
 ```
 [listener]
   [listener.0]
     ip = '192.168.4.136'
     port = 53
+```
+
+4. Restart the `ctrld` service.
+
+```
+$ sudo ctrld service restart
+```
+
+5. Verify that the server's **IP address** is listed as the **nameserver** in the `/etc/resolv.conf` file.
+
+```
+nameserver 192.168.4.223
 ```
 
 4. Run a test query.
