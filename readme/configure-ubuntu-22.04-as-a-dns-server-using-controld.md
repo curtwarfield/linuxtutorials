@@ -24,6 +24,7 @@ layout:
 
 * An active `Control D` account.
 * A `Control D` **Resolver ID**.
+* A device and profile already configured on the [Dashboard](https://controld.com/dashboard/profiles).
 
 ## Installation
 
