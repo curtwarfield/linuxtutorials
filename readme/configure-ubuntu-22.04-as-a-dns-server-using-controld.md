@@ -100,5 +100,6 @@ $ sudo ctrld restart
 $ dig verify.controld.com @192.168.4.136 +short
 ```
 
-If `verify.controld.com` resolves, you are successfully using `Control D` for DNS requests. You can now use this system as the DNS server for your entire network by simply configuring your router to use this system's **IP address**.\
+If `verify.controld.com` resolves, you are successfully using `Control D` for DNS requests. You can now use this system as the DNS server for your entire network by simply configuring your router to use this system's **IP address**.
+
 If you are unable to specify a DNS server in your router, you can also change any client on your network to point to this system's **IP address** as an alternative.
