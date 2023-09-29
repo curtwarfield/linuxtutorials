@@ -11,7 +11,7 @@ title: How to create a user with a non-standard home directory
 * Red Hat Enterprise Linux
 * openssh
 ## Issue
-* How to create an `SSH` user with a non-standard home directory
+* How to create an `SSH` user with a non-standard home directory.
 ## Resolution
 1. Create the home directory for the user.
 ~~~plaintext
