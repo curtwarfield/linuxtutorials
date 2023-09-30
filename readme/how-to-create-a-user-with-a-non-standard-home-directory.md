@@ -101,7 +101,7 @@ For example:
 # chcon -R -v system_u:object_r:usr_t:s0 /storage/media/myuser/.ssh/authorized_keys
 ```
 
-Verify that you can log in successfully.
+Verify you can log in successfully.
 
 ```
 $ ssh myuser@192.0.2.1
