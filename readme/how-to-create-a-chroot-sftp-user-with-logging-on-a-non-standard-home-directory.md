@@ -12,7 +12,7 @@ layout:
     visible: true
 ---
 
-# How to configure chroot sftp users with logging with a non-standard home directory
+# How to create a chroot sftp user with logging on a non-standard home directory
 
 ## Environment
 
@@ -59,7 +59,19 @@ For example:
 # passwd myuser
 ```
 
-3. Create a `/dev` directory in the user directory.
+3. Apply the correct `SELinux` security context to the home directory.
+
+```
+# chcon -Rv --type=user_home_dir_t /path/to/directory/user/home
+```
+
+For example:
+
+```
+# chcon -Rv --type=user_home_dir_t /storage/media/myuser/home
+```
+
+4. Create a `/dev` directory in the user directory.
 
 ```
 # mkdir /path/to/directory/user
@@ -71,7 +83,7 @@ For example:
 # mkdir /storage/media/myuser/dev
 ```
 
-4. Change the ownership and permissions of the home directory.
+5. Change the ownership and permissions of the home directory.
 
 ```
 # chown username:username /path/to/directory/user/home
@@ -112,7 +124,7 @@ drwxr-xr-x. 2 root   root   6 Sep 22 09:23 dev
 drwx------. 2 myuser myuser 6 Sep 22 09:23 uploads
 ```
 
-5. Use the `ssh-copy-id` command to copy the `ssh` key from a client to the server.
+6. Use the `ssh-copy-id` command to copy the `ssh` key from a client to the server.
 
 ```
 $ ssh-copy-id user@ip_address
@@ -124,19 +136,19 @@ For example:
 $ ssh-copy-id myuser@192.0.2.1
 ```
 
-6. Use the `chcon` command to apply the correct `SELinux` security context to the `authorized_keys` file.
+7. Apply the correct `SELinux` security context to the `.ssh` directory.
 
 ```
-# chcon -R -v system_u:object_r:usr_t:s0 /path/to/directory/username/home/.ssh/authorized_keys
+# chcon -Rv -t ssh_home_t  /path/to/directory/username/home/.ssh/
 ```
 
 For example:
 
 ```
-# chcon -R -v system_u:object_r:usr_t:s0 /storage/media/myuser/home/.ssh/authorized_keys
+# chcon -Rv -t ssh_home_t /storage/media/myuser/home/.ssh/
 ```
 
-7. Create an entry in the `/etc/rsyslog.conf` file to create the log file for the user.
+8. Create an entry in the `/etc/rsyslog.conf` file to create the log file for the user.
 
 ```
 $AddUnixListenSocket /path/to/directory/user/dev/log
@@ -154,7 +166,7 @@ if $programname == 'internal-sftp' then /var/log/sftp.log
 & stop
 ```
 
-8. Run the bind option of the `mount` command.
+9. Run the bind option of the `mount` command.
 
 ```
 # mount -o bind /dev /path/to/directory/user/dev
@@ -166,7 +178,7 @@ For example:
 # mount -o bind /dev /storage/media/myuser/dev
 ```
 
-9. Apply the correct `SELinux` label to the log file.
+10. Apply the correct `SELinux` label to the log file.
 
 ```
 # semanage fcontext -a -t devlog_t /path/to/directory/user/dev/log
@@ -178,7 +190,7 @@ For example:
 # semanage fcontext -a -t devlog_t /storage/media/myuser/dev/log
 ```
 
-10. Edit the `/etc/ssh/sshd_config` file and add a `Match` section for the user:
+11. Edit the `/etc/ssh/sshd_config` file and add a `Match` section for the user:
 
 ```
 Match User username
@@ -194,14 +206,14 @@ ChrootDirectory /storage/media/%u
 ForceCommand internal-sftp -f AUTH -l VERBOSE -d /home
 ```
 
-11. Enable the `SELinux` boolean for ssh chroot.
+12. Enable the `SELinux` boolean for ssh chroot.
 
 ```
 # setsebool -P ssh_chroot_rw_homedirs on
 # setsebool -P selinuxuser_use_ssh_chroot on
 ```
 
-12. Restart `rsyslog` and `sshd`.
+13. Restart `rsyslog` and `sshd`.
 
 ```
 # systemctl restart rsyslog
