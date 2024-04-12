@@ -73,4 +73,4 @@ sudo loginctl enable-linger <username>
 
 Change `<username>` to your actual username.
 
-The **Duplicacy** web GUI will now automatically start an run in the background as a `systemd` service.
+The **Duplicacy** web GUI will now automatically start and run in the background as a `systemd` service.
