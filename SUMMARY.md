@@ -7,3 +7,4 @@
   * [Configure Ubuntu 22.04 as a DNS server using ControlD](home/configure-ubuntu-22.04-as-a-dns-server-using-controld.md)
   * [How to create a user with a non-standard home directory](home/how-to-create-a-user-with-a-non-standard-home-directory.md)
   * [How to create a chroot sftp user with logging on a non-standard home directory](home/how-to-create-a-chroot-sftp-user-with-logging-on-a-non-standard-home-directory.md)
+  * [How to configure the Duplicacy Web edition as a systemd service](readme/how-to-configure-the-duplicacy-web-edition-as-a-systemd-service.md)
