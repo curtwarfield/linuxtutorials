@@ -1,3 +1,17 @@
+---
+layout:
+  title:
+    visible: true
+  description:
+    visible: false
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+---
+
 # How to use Duplicacy to backup to Storj cloud storage
 
 ## Introduction
@@ -17,7 +31,7 @@ We'll use the CLI version for this tutorial to back up to [Storj](https://www.st
 
 Pre-compiled binaries are available for Linux, macOS, and Windows directly from the Duplicacy [GitHub](https://github.com/gilbertchen/duplicacy/releases) repository.
 
-Download the latest version for your system. The current version is `3.1.0`.
+Download the latest version for your system. The current version is `3.2.3`.
 
 ```plaintext
 $ sudo wget -O /usr/local/bin/duplicacy https://github.com/gilbertchen/duplicacy/releases/download/v3.1.0/duplicacy_linux_x64_3.1.0
@@ -40,14 +54,14 @@ duplicacy init [command options] <snapshot id> <storage url>
 The `<snapshot id>` refers to the name of the backup job.\
 The `<storage url>` refers to the storage location of the backup job.
 
-The **duplicacy init** command has multiple options, but we'll only be using the following:
+The duplicacy `init` command has multiple options, but we'll only be using the following:
 
 ```plaintext
 -storage-name <name>  The name assigned to the storage.
 -repository <path>   The directory to back up.
 ```
 
-We'll initialize the repository using the **duplicacy init** command and these options in the next section.
+We'll initialize the repository using the duplicacy `init` command and these options in the next section.
 
 ## Storj cloud storage
 
@@ -55,12 +69,12 @@ The [Storj](https://www.storj.io/) cloud provider offers decentralized storage b
 
 The free tier offers 150 GB of free storage.
 
-To backup data via Storj, create a storage bucket and **API** key from their website.
+To backup data via `Storj`, create a storage bucket and **API** key from their website.
 
 1. Sign up for a free account.
-2. Create a new storage bucket and passphrase. The passphrase is not used for Duplicacy because you have an **API** key. However, it is a requirement for the storage bucket.
-3. Create an [API key](https://docs.storj.io/dcs/getting-started/quickstart-uplink-cli/generate-access-grants-and-tokens/generate-a-token).  Navigate to the **Access** page and click the **Create Keys for CLI** link (rightmost option).  Provide name, permissions, and optionally buckets, and select **Create Keys**.
-4. Copy and save the Satellite Address and **API** key in a safe place or download them because they will only appear once.
+2. Create a new storage bucket and passphrase. The passphrase is not used for `Duplicacy` because you have an **API** key. However, it is a requirement for the storage bucket.
+3. Create an [API key](https://docs.storj.io/dcs/getting-started/quickstart-uplink-cli/generate-access-grants-and-tokens/generate-a-token). Navigate to the **Access** page and click the **Create Keys for CLI** link (rightmost option). Provide name, permissions, and optionally buckets, and select **Create Keys**.
+4. Copy and save the **Satellite Address** and **API** key in a safe place or download them because they will only appear once.
 
 You will need the **Satellite Address** and **API key** to initialize your repository.
 
@@ -70,22 +84,33 @@ Here is the format:
 $ duplicacy init -storage-name <storage name> -repository <path to directory to backup> <storage id> <storage url>
 ```
 
-The `<storage url>` for Storj uses the following format:
+The `<storage url>` for `Storj` uses the following format:
 
 ```plaintext
 storj://satellite_address/bucket
 ```
 
+#### Optional performance parameters
+
+`Duplicacy` uses a unique pack-and-split method to split files into [chunks](https://forum.duplicacy.com/t/chunk-size-details/1082) with a default `chunk size` of 4 `MiB`.
+
+Increase the `chunk size` for better performance with `Storj` buckets.
+
+```
+-chunk-size 32M
+-max-chunk-size 64M
+```
+
 Here is the complete command for this example:
 
 ```plaintext
-$  duplicacy init -storage-name storjphotos -repository /home/poochie/Photos photosbackup storj://PrseFhdxYxKicsiFmxK@us1.storj.io:7777/photosbackup
+$  duplicacy init -chunk-size 32M -max-chunk-size 64M -storage-name storjphotos -repository /home/poochie/Photos photosbackup storj://PrseFhdxYxKicsiFmxK@us1.storj.io:7777/photosbackup
 ```
 
 Here is the output:
 
 ```plaintext
-$ duplicacy init -storage-name storjphotos -repository /home/poochie/Photos photosbackup storj://PrseFhdxYxKicsiFmxK@us1.storj.io:7777/photosbackup
+$ duplicacy init -chunk-size 32M -max-chunk-size 64M -storage-name storjphotos -repository /home/poochie/Photos photosbackup storj://PrseFhdxYxKicsiFmxK@us1.storj.io:7777/photosbackup
 Enter the API access key:
 Enter the passphrase:
 /home/poochie/Photos will be backed up to storj://PrseFhdxYxKicsiFmxK@us1.storj.io:7777/photosbackup with id photosbackup
@@ -103,7 +128,7 @@ Enter the passphrase:
 
 ## Saving configuration information
 
-**Duplicacy** automatically creates a configuration folder named `.duplicacy` when the initialization is complete. The preferences file in this directory contains the configuration data.
+`Duplicacy` automatically creates a configuration folder named `.duplicacy` when the initialization is complete. The preferences file in this directory contains the configuration data.
 
 The [duplicacy set](https://github.com/gilbertchen/duplicacy/wiki/set) command allows you to store your keys and passphrase in the configuration file to avoid manually inputting them when backing up or restoring files.
 
@@ -163,7 +188,7 @@ Packed profile.png (133686)
 Backup for /home/poochie/Photos at revision 1 completed
 ```
 
-**Duplicacy** assigns a revision number starting with one and increments it every time you run the backup.
+`Duplicacy` assigns a revision number starting with one and increments it every time you run the backup.
 
 Here is what a second backup will look like if there are no file changes.
 
@@ -186,7 +211,7 @@ Use the [duplicacy restore](https://github.com/gilbertchen/duplicacy/wiki/restor
 duplicacy restore [command options] [--] [pattern] ...
 ```
 
-The **duplicacy restore** command has multiple options, but we'll only be discussing the following:
+The duplicacy `restore` command has multiple options, but we'll only be discussing the following:
 
 ```plaintext
 -r <revision> - revision number of the snapshot
@@ -250,7 +275,7 @@ Use the [duplicacy list](https://github.com/gilbertchen/duplicacy/wiki/list) com
 duplicacy list [command options]
 ```
 
-The **duplicacy list** command has multiple options, but we'll only be discussing the following:
+The duplicacy `list` command has multiple options, but we'll only be discussing the following:
 
 ```plaintext
 -r - revision number of the snapshot 
@@ -280,4 +305,4 @@ Total size: 183974, file chunks: 3, metadata chunks: 3
 
 ## Conclusion
 
-**Duplicacy** is a powerful backup tool and this tutorial is only a brief introduction of what it has to offer. Check out the Duplicacy [forum](https://forum.duplicacy.com/) for complete documentation and helpful community support.
+`Duplicacy` is a powerful backup tool and this tutorial is only a brief introduction of what it has to offer. Check out the Duplicacy [forum](https://forum.duplicacy.com/) for complete documentation and helpful community support.
