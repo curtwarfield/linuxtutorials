@@ -8,3 +8,4 @@
   * [How to create a chroot sftp user with logging on a non-standard home directory](home/how-to-create-a-chroot-sftp-user-with-logging-on-a-non-standard-home-directory.md)
   * [How to configure the Duplicacy Web edition as a systemd service](readme/how-to-configure-the-duplicacy-web-edition-as-a-systemd-service.md)
   * [How to use Duplicacy to backup to Storj cloud storage](readme/how-to-use-duplicacy-to-backup-to-storj-cloud-storage.md)
+  * [How to configure ErsatzTV as a systemd service](readme/how-to-configure-ersatztv-as-a-systemd-service.md)
